@@ -4,3 +4,9 @@ micronaut:
 
 mongodb:
   uri: mongodb://localhost:27017
+
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "localhost:8500"

@@ -4,6 +4,10 @@ services:
     image: mongo
     ports:
       - 27017:27017
+  consul:
+      image: consul
+      ports:
+        - 8500:8500
   customer:
     network_mode: host
     build: 
@@ -12,3 +16,4 @@ services:
       - 8080:8080
     depends_on:
       - mongo
+      - consul
