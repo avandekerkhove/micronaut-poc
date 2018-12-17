@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Singleton;
 
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import com.mongodb.client.model.Filters;
 import com.mongodb.reactivestreams.client.MongoClient;
@@ -32,6 +33,13 @@ public class CustomersRepository {
                 getMongoCollection()
                     .find())
                 .toList();
+    }
+    
+    public Maybe<Customer> getById(String customerId) {
+        ObjectId id = new ObjectId(customerId);
+        return Flowable.fromPublisher(
+                getMongoCollection().find(Filters.eq("_id", id)).limit(1))
+                .firstElement();
     }
     
     public Maybe<Customer> find(String name, String firstName, Integer age) {

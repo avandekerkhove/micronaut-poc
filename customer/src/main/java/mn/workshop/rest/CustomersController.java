@@ -29,6 +29,11 @@ public class CustomersController {
         return repository.getAll();
     }
     
+    @Get("/{customerId}")
+    public Single<Customer> getById(String customerId) {
+        return repository.getById(customerId).toSingle();
+    }
+    
     @Post("/")
     public HttpResponse<Single<Customer>> save(@Valid @Body Customer customer) {
         return HttpResponse.created(repository.save(customer));
