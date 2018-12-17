@@ -1,11 +1,13 @@
-version: '2'
+version: '3'
 services:
   mongo:
     image: mongo
     ports:
       - 27017:27017
   customer:
-    build: ./customer
+    network_mode: host
+    build: 
+      context: ./customer
     ports:
       - 8080:8080
     depends_on:
