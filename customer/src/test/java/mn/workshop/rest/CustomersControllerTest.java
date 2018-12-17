@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
@@ -20,7 +21,7 @@ public class CustomersControllerTest {
 
     @BeforeClass
     public static void setupServer() {
-        server = ApplicationContext.run(EmbeddedServer.class); 
+        server = ApplicationContext.run(EmbeddedServer.class, CollectionUtils.mapOf("consul.client.registration.enabled", false)); 
         client = server
                 .getApplicationContext()
                 .createBean(HttpClient.class, server.getURL());  
