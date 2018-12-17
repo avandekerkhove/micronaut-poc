@@ -7,9 +7,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.runtime.server.EmbeddedServer;
+import mn.workshop.crud.Customer;
 
 public class CustomersControllerTest {
 
@@ -31,7 +33,14 @@ public class CustomersControllerTest {
     }
     
     @Test
-    public void testIndex() throws Exception {
+    public void testGetAll() {
         assertEquals(HttpStatus.OK, client.toBlocking().exchange("/customers").status());
     }
+    
+    @Test
+    public void testCreateCustomer() {
+        Customer customer = new Customer("apeupres", "jean-michel", 34);
+        assertEquals(HttpStatus.CREATED, client.toBlocking().exchange(HttpRequest.POST("/customers", customer)).status());
+    }
+    
 }

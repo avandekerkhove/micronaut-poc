@@ -1,3 +1,6 @@
 micronaut:
     application:
         name: customer
+
+mongodb:
+  uri: mongodb://localhost:27017
