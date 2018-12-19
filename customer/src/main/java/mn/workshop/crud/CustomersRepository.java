@@ -1,12 +1,8 @@
 package mn.workshop.crud;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Singleton;
-
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 
 import com.mongodb.client.model.Filters;
 import com.mongodb.reactivestreams.client.MongoClient;
@@ -35,32 +31,14 @@ public class CustomersRepository {
                 .toList();
     }
     
-    public Maybe<Customer> getById(String customerId) {
-        ObjectId id = new ObjectId(customerId);
+    public Maybe<Customer> getByLogin(String login) {
         return Flowable.fromPublisher(
-                getMongoCollection().find(Filters.eq("_id", id)).limit(1))
-                .firstElement();
-    }
-    
-    public Maybe<Customer> find(String name, String firstName, Integer age) {
-        var filters = new ArrayList<Bson>();
-        if (name != null) {
-            filters.add(Filters.eq("name", name));
-        }
-        if (firstName != null) {
-            filters.add(Filters.eq("firstName", firstName));
-        }
-        if (age != null) {
-            filters.add(Filters.eq("age", age));
-        }
-        
-        return Flowable.fromPublisher(
-                getMongoCollection().find(Filters.and(filters)).limit(1))
+                getMongoCollection().find(Filters.eq("login", login)).limit(1))
                 .firstElement();
     }
     
     public Single<Customer> save(Customer customer) {
-        return find(customer.getName(), customer.getFirstName(), customer.getAge())
+        return getByLogin(customer.getLogin())
                 .switchIfEmpty(
                         Single.fromPublisher(getMongoCollection().insertOne(customer)).map(success -> customer)
                 );

@@ -29,9 +29,9 @@ public class CustomersController {
         return repository.getAll();
     }
     
-    @Get("/{customerId}")
-    public Single<Customer> getById(String customerId) {
-        return repository.getById(customerId).toSingle();
+    @Get("/{login}")
+    public Single<Customer> getByLogin(String login) {
+        return repository.getByLogin(login).toSingle();
     }
     
     @Post("/")

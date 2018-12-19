@@ -1,38 +1,35 @@
 package mn.workshop.crud;
 
-import java.io.Serializable;
-
-import org.bson.codecs.pojo.annotations.BsonCreator;
-import org.bson.codecs.pojo.annotations.BsonProperty;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class Customer implements Serializable {
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -4252169903131580577L;
+public class Customer {
     
+    private String login;
     private String name;
     private String firstName;
     private int age;
     
     public Customer() {}
     
-    @JsonCreator
-    @BsonCreator
     public Customer(
-            @JsonProperty("name")
-            @BsonProperty("name") String name, 
-            @JsonProperty("firstName") 
-            @BsonProperty("firstName") String firstName, 
-            @JsonProperty("age")
-            @BsonProperty("age") int age) {
+            String login,
+            String name, 
+            String firstName, 
+            int age) {
+        this.login = login;
         this.name = name;
         this.firstName = firstName;
         this.age = age;
+    }
+
+    public String getId() {
+        return login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getName() {

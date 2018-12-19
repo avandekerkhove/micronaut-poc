@@ -45,7 +45,7 @@ public class CustomersControllerTest {
     
     @Test
     public void testCreateCustomer() {
-        Customer customer = new Customer("apeupres", "jean-michel", 34);
+        Customer customer = new Customer("jma@test.com", "apeupres", "jean-michel", 34);
         assertEquals(HttpStatus.CREATED, client.toBlocking().exchange(HttpRequest.POST("/customers", customer)).status());
     }
     
