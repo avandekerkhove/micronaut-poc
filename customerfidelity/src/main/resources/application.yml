@@ -1,0 +1,11 @@
+micronaut:
+  application:
+    name: customerfidelity
+  server:
+    port: 8081
+    
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "localhost:8500"
