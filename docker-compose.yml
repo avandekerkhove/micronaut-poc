@@ -17,3 +17,12 @@ services:
     depends_on:
       - mongo
       - consul
+  customerfidelity: 
+    network_mode: host
+    build: 
+      context: ./customerfidelity
+    ports:
+      - 8081:8081
+    depends_on:
+      - consul
+      - customer
