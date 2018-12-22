@@ -22,8 +22,7 @@ docker-compose build
 docker-compose up
 ```
 
-
-## Test
+## Test
 
 Create a customer and persist in mongoDB :
 ```shell
